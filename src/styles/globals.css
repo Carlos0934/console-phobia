@@ -21,8 +21,14 @@ body {
   background: white;
   opacity: 0.7;
 }
+.search-panel:hover {
+  opacity: 1;
+}
 
 .card-panel {
   background: white;
   opacity: 0.7;
+}
+.card-panel:hover {
+  opacity: 1;
 }

@@ -6,6 +6,12 @@ interface Props {
   picture: string
   url: string
 }
+const priceFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+})
+
 export const ConsoleCard: FC<Props> = ({ title, price, picture, url }) => {
   return (
     <div className="w-[350px] group rounded-2xl card-panel shadow px-4 py-4 justify-center flex flex-col hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1">
@@ -19,7 +25,7 @@ export const ConsoleCard: FC<Props> = ({ title, price, picture, url }) => {
       </h3>
       <div className="flex flex-col gap-2">
         <span className="text-gray-500 font-semibold text-center text-lg ">
-          USD $ {price}.00
+          {priceFormatter.format(price)}
         </span>
         <a
           className="bg-blue-400 rounded-full text-white  transform  text-center py-1.5 px-5  w-2/3 mx-auto mt-2  hover:-translate-y-1 hover:bg-blue-500 hover:drop-shadow-xl  transition-all duration-200"
