@@ -19,12 +19,11 @@ const useSearch = (items: Item[]) => {
 export const SearchBar: FC<Props> = ({ items, onSearch }) => {
   const { search } = useSearch(items)
   const [query, setQuery] = useState('')
-
+  useEffect(() => {
+    onSearch(search(query))
+  }, [query])
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
-    const result = search(e.target.value)
-
-    onSearch(result)
   }
 
   return (

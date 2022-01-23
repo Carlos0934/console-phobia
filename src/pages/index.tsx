@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { useState } from 'react'
 import { ConsoleCard } from '../components/ConsoleCard'
 import { SearchBar } from '../components/SearchBar'
@@ -16,26 +17,31 @@ const Home: NextPage<Props> = ({ items }) => {
   }
 
   return (
-    <div className="max-w-lg sm:max-w-6xl mx-auto">
-      <TopPanel>
-        <SearchBar onSearch={onSearch} items={items} />
-      </TopPanel>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2  justify-items-center gap-5 mt-5">
-        {itemsToShow.map((item) => (
-          <ConsoleCard
-            key={`${item.title}-${item.website}`}
-            picture={item.picture}
-            price={item.price}
-            url={item.url}
-            title={item.title}
-          />
-        ))}
+    <>
+      <Head>
+        <title>Console Phobia</title>
+      </Head>
+      <div className="max-w-lg sm:max-w-6xl mx-auto">
+        <TopPanel>
+          <SearchBar onSearch={onSearch} items={items} />
+        </TopPanel>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2  justify-items-center gap-5 mt-5">
+          {itemsToShow.map((item) => (
+            <ConsoleCard
+              key={`${item.title}-${item.website}`}
+              picture={item.picture}
+              price={item.price}
+              url={item.url}
+              title={item.title}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const items = await itemScrapper.getItems()
   return {
     props: {

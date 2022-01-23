@@ -26,7 +26,7 @@ export class AmazonPlaywrightItemProvider implements PlaywrightItemProvider {
   ): Promise<ElementHandle<HTMLElement | SVGElement>[]> {
     await page.goto(`https://www.amazon.com/s?k=${description}`)
     await page.waitForSelector(this.selector)
-    const data = (await page.$$(this.selector)).slice(0, 20)
+    const data = await page.$$(this.selector)
     return data
   }
 
